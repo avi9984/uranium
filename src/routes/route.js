@@ -2,15 +2,23 @@ const express = require('express');
 const loggerModule = require('../logger/logger')
 // const info = require('../util/helper')
 // const format = require('../validator/formatter')
-// const router = express.Router();
-// const helperModule= require('../util/helper')
+const router = express.Router();
+const helperModule= require('../util/helper')
 
 router.get('/test-me1', function (req, res) {
     loggerModule.WelcomeMassage();
-    helperModule.printDate();
-    helperModule.printMonth();
-    helperModule.getBatchInfo();
+    // helperModule.printDate();
+    // helperModule.printMonth();
+    // helperModule.getBatchInfo();
     res.send('My first ever api!')
+   
+});
+router.get('/test-me1', function (req, res) {
+    loggerModule.WelcomeMassage();
+    // helperModule.printDate();
+    // helperModule.printMonth();
+    // helperModule.getBatchInfo();
+    res.send('My first ever aps!')
    
 });
 
