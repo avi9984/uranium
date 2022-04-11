@@ -102,22 +102,17 @@ let players =
 router.post('/players', function (req, res) {
 
     //LOGIC WILL COME HERE
-let data= req.body;
+    let data = req.body;
     console.log(data)
-    players.map((x)=>{
-        if(x.name==data.name){
+    players.map((x) => {
+        if (x.name == data.name) {
             return res.send("Player already exists")
         }
     })
     players.push(data)
 
-    res.send({newPlayer:players})
+    res.send({ newPlayer: players })
 })
-
-
-
-
-
 
 
 
