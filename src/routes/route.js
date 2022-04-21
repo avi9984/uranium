@@ -1,13 +1,32 @@
 const express = require('express');
+const userController=require("../controllers/userController")
+const productController=require("../controllers/productController")
+const orderController= require("../controllers/orderController")
 const router = express.Router();
+
+
+const middleware=function (req, res, next) {
+    let headers= req.headers
+    let freeApp=headers['isfreeappuser']
+    if (!freeApp) {
+      res.send("request is missing a mandatory header");
+    }
+  //  else if (freeApp=="true") {
+  //     next();
+  //   }
+    else{
+      next();
+    }
+}
+
+
 // const UserModel= require("../models/userModel.js")
-const UserController= require("../controllers/userController")
+
 //const BookController= require("../controllers/bookController")
+// router.get("/test-me", function (req, res) {
 
-
-router.get("/test-me", function (req, res) {
-    res.send("My first ever api!")
-})
+//     res.send("My first ever api!")
+// })
 
 
 // router.post("/createUser", UserController.createUser  )
@@ -39,18 +58,14 @@ router.get("/test-me", function (req, res) {
 
 
 
+// router.post('/createUser', userController.createUser)
 
+// router.get("/basicRoute", UserController.basicCode)
+// router.post('/create-a-user', userController.createAUser)
 
-router.get("/basicRoute", UserController.basicCode)
-router.post('/create-a-user', UserController.createAUser)
-
-
-
-// router.get("/basicRoute2", commonMW.mid1, UserController.basicCode2)
-// router.get("/basicRoute3", commonMW.mid2, UserController.basicCode3)
-// router.get("/basicRoute4", commonMW.mid1, commonMW.mid4, UserController.basicCode4)
-
-
+router.post('/createProduct', productController.createProduct)
+router.post('/createUser', middleware, userController.createUser)
+router.post('/createOrder', middleware, orderController.createOrder)
 
 
 module.exports = router;
