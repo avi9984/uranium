@@ -1,16 +1,19 @@
 const jwt = require("jsonwebtoken");
 const userModel = require("../models/userModel");
 
+
+// solution 1
 const createUser = async function (abcd, xyz) {
   //You can name the req, res objects anything.
   //but the first parameter is always the request 
   //the second parameter is always the response
   let data = abcd.body;
   let savedData = await userModel.create(data);
-  console.log(abcd.newAtribute);
+  // console.log(abcd.newAtribute);
   xyz.send({ msg: savedData });
 };
 
+// solution 2
 const loginUser = async function (req, res) {
   let userName = req.body.emailId;
   let password = req.body.password;
@@ -31,15 +34,17 @@ const loginUser = async function (req, res) {
   let token = jwt.sign(
     {
       userId: user._id.toString(),
-      batch: "thorium",
+      batch: "Uranium",
       organisation: "FUnctionUp",
     },
-    "functionup-thorium"
+    "functionup-uranium"
   );
   res.setHeader("x-auth-token", token);
   res.send({ status: true, data: token });
 };
 
+
+// solution 3
 const getUserData = async function (req, res) {
   let token = req.headers["x-Auth-token"];
   if (!token) token = req.headers["x-auth-token"];
@@ -54,7 +59,7 @@ const getUserData = async function (req, res) {
   // Input 1 is the token to be decoded
   // Input 2 is the same secret with which the token was generated
   // Check the value of the decoded token yourself
-  let decodedToken = jwt.verify(token, "functionup-thorium");
+  let decodedToken = jwt.verify(token, "functionup-uranium");
   if (!decodedToken)
     return res.send({ status: false, msg: "token is invalid" });
 
@@ -65,6 +70,7 @@ const getUserData = async function (req, res) {
 
   res.send({ status: true, data: userDetails });
 };
+
 
 const updateUser = async function (req, res) {
 // Do the same steps here:
