@@ -16,29 +16,28 @@ const basicCode= async function(req, res) {
 
 
 
-
-
-
-
-
-
-
-
-
-
-
-
-
-
 const createUser= async function (req, res) {
+  try {
     let data= req.body
     let savedData= await UserModel.create(data)
     res.send({msg: savedData})
+  } 
+  catch (err) {
+    console.log("This is the error :", err.message)
+    res.status(500).send({ msg: "Error", error: err.message })
 }
+  }
+
 
 const getUsersData= async function (req, res) {
+try {
     let allUsers= await UserModel.find()
     res.send({msg: allUsers})
+} catch (error) {
+    console.log("This is the error :", err.message)
+    res.status(500).send({ msg: "Error", error: err.message })
+    
+}
 }
 
 module.exports.createUser= createUser

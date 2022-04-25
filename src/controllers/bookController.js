@@ -44,27 +44,18 @@ const createBook = async function (req, res) {
 
 
 
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
 const getBooksData = async function (req, res) {
-    let allBooks = await BookModel.find({ authorName: "HO" })
+    try
+   { let allBooks = await BookModel.find({ authorName: "HO" })
     console.log(allBooks)
     if (allBooks.length > 0) res.send({ msg: allBooks, condition: true })
     else res.send({ msg: "No books found", condition: false })
+}catch(err){
+    console.log("This is the error :", err.message)
+        res.status(500).send({ msg: "Error", error: err.message })
 }
+}
+
 
 
 const updateBooks = async function (req, res) {
