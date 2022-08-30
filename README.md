@@ -22,5 +22,7 @@
 // "NOT AUTHENTICATED OR FORBIDDEN"..403 // if ( token.userId === userId) {...} else {res.status(403).send({}) }
 // -- try catch ....// "SERVER ERROR"...500
 ```
+```
 // -- ALL GOOD... //status(200)- OK
 // --- "ALL GOOD and A NEW RESOURCE WAS SUCCEFULLY CREATED" ...status(201)..e.g a new user registers herself successfully
+```
